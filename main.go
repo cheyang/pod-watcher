@@ -185,7 +185,7 @@ func main() {
 		DeleteFunc: func(obj interface{}) {
 			// IndexerInformer uses a delta queue, therefore for deletes we have to use this
 			// key function.
-			// key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(obj)
+			key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(obj)
 			if err == nil {
 				// queue.Add(key)
 				// s := key.(string)

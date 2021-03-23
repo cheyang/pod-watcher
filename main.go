@@ -14,8 +14,8 @@ import (
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/cache"
-	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/workqueue"
+	"k8s.io/client-go/rest"
 )
 
 // Controller demonstrates how to implement a controller with client-go.
@@ -177,7 +177,7 @@ func main() {
 			key, err := cache.MetaNamespaceKeyFunc(new)
 			if err == nil {
 				// queue.Add(key)
-				fmt.Printf("Update for Pod %s\n", obj.(*v1.Pod).GetName())
+				fmt.Printf("Update for Pod %s\n", old.(*v1.Pod).GetName())
 			}
 		},
 		DeleteFunc: func(obj interface{}) {

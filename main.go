@@ -170,16 +170,16 @@ func main() {
 			key, err := cache.MetaNamespaceKeyFunc(obj)
 			if err == nil {
 				// queue.Add(key)
-				s := key.(string)
-				fmt.Printf("Add for Pod %s\n", s)
+				// s := key.(string)
+				fmt.Printf("Add for Pod %s\n", key)
 			}
 		},
 		UpdateFunc: func(old interface{}, new interface{}) {
 			key, err := cache.MetaNamespaceKeyFunc(new)
 			if err == nil {
 				// queue.Add(key)
-				s := key.(string)
-				fmt.Printf("Update for Pod %s\n", s)
+				// s := key.(string)
+				fmt.Printf("Update for Pod %s\n", key)
 			}
 		},
 		DeleteFunc: func(obj interface{}) {
@@ -188,8 +188,8 @@ func main() {
 			// key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(obj)
 			if err == nil {
 				// queue.Add(key)
-				s := key.(string)
-				fmt.Printf("Delete for Pod %s\n", s)
+				// s := key.(string)
+				fmt.Printf("Delete for Pod %s\n", key)
 			}
 		},
 	}, cache.Indexers{})

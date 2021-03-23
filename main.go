@@ -167,17 +167,17 @@ func main() {
 	// of the Pod than the version which was responsible for triggering the update.
 	indexer, informer := cache.NewIndexerInformer(podListWatcher, &v1.Pod{}, 0, cache.ResourceEventHandlerFuncs{
 		AddFunc: func(obj interface{}) {
-			// key, err := cache.MetaNamespaceKeyFunc(obj)
+			key, err := cache.MetaNamespaceKeyFunc(obj)
 			if err == nil {
 				// queue.Add(key)
-				fmt.Printf("Add for Pod %s\n", obj.(*v1.Pod).GetName())
+				fmt.Printf("Add for Pod %s\n", key.(string))
 			}
 		},
 		UpdateFunc: func(old interface{}, new interface{}) {
-			// key, err := cache.MetaNamespaceKeyFunc(new)
+			key, err := cache.MetaNamespaceKeyFunc(new)
 			if err == nil {
 				// queue.Add(key)
-				fmt.Printf("Update for Pod %s\n", old.(*v1.Pod).GetName())
+				fmt.Printf("Update for Pod %s\n", key.(string))
 			}
 		},
 		DeleteFunc: func(obj interface{}) {
@@ -186,7 +186,7 @@ func main() {
 			// key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(obj)
 			if err == nil {
 				// queue.Add(key)
-				fmt.Printf("Delete for Pod %s\n", obj.(*v1.Pod).GetName())
+				fmt.Printf("Delete for Pod %s\n", key.(string))
 			}
 		},
 	}, cache.Indexers{})
